@@ -30,7 +30,7 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        //	RateLimiter limiter= new SlidingWindowLogsRateLimiter();
+
         RateLimiter limiter= new SlidingWindowCounterRateLimiter();
 
         Client client = new Client(limiter);
@@ -71,6 +71,9 @@ class Task implements Callable<Boolean> {
 
         boolean result = client.checkIfAllowed(user);
 
+        if(!result) {
+            System.out.println(user + " : request got rejected");
+        }
         return result;
 
     }
